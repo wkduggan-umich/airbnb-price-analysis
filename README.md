@@ -34,22 +34,27 @@ Before beginning the prediction analysis, plots were constructed to get a better
 
 #### Neighbourhood group bar chart
 
-<iframe
- src="assets/univariate_neighbourhood.html"
- width="800"
- height="600"
- frameborder="0"
- ></iframe>
+<div style="margin-bottom: -20px;">
+    <iframe
+    src="assets/univariate_neighbourhood.html"
+    width="800"
+    height="600"
+    frameborder="0"
+    ></iframe>
+</div>
  The plot above shows the distribution of AirBNBs across the five NYC boroughs. As seen from the plot, most of units are in Manhattan and Brooklyn. This feels intuitive because these are the highest areas of tourism in NYC.
 
 #### Price distribution
 
-<iframe
- src="assets/univariate_price.html"
- width="800"
- height="600"
- frameborder="0"
- ></iframe>
+<div style="margin-bottom: -20px;">
+    <iframe
+    src="assets/univariate_price.html"
+    width="800"
+    height="600"
+    frameborder="0"
+    ></iframe>
+</div>
+ 
  The plot above shows a histogram of the price of AirBNBs. As seen from the plot, the price is relativley uniform. Almost all of the units have a nightly price between 100 and 1200 dollars, except for a few outliers.
 
 ### Bivariate Analysis
@@ -57,34 +62,38 @@ Before beginning the prediction analysis, plots were constructed to get a better
 It is also important to get an initial understanding of the relationship between variables in the dataset.
 
 #### Price vs. NYC Borough Chart
-
+<div style="margin-bottom: -20px;">
 <iframe
  src="assets/bivariate_neighbourhood_price.html"
  width="800"
  height="600"
  frameborder="0"
  ></iframe>
+</div>
  The box plot above shows the relationship between AirBNB price and the NYC borough it is located in. As seen from the chart, the median, Q1, and Q3 of the price are relativley constant across the five boroughs.
 
 #### Price vs. Room Type
 
+<div style="margin-bottom: -20px;">
 <iframe
  src="assets/bivariate_type_price.html"
  width="800"
  height="600"
  frameborder="0"
  ></iframe>
+</div>
  The box plot above shows the relationship between AirBNB price and the room type. Again the price is fairly constant across the different room types. The main note is that their tend to be less hotels on the lower end of the price distribution. This should feel intuitive as many hotels have base rates that would be higher than a typical AirBNB.
 
 
 #### Room Type vs. NYC Borough Chart
-
+<div style="margin-bottom: -20px;">
 <iframe
  src="assets/bivariate_neighbourhood_type.html"
  width="800"
  height="600"
  frameborder="0"
  ></iframe>
+</div>
  The plot above shows the number of rentals across both NYC borough and AirBNB type. The key things to note are that there are far more entire homes/apartments in Manhattan compared to other boroughs. Additionally, there are very few hotel listings outside of Manhattan. Additionally, shared rooms are far less common in Staten Island and the Bronx.
 
 ### Aggregations
