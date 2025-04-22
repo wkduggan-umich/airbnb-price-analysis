@@ -4,9 +4,7 @@
 
 The goal of this project is to analyze the factors that control the price of an AirBNB. The AirBNB open data set contains data on all 2,667,574 AirBNB units in New York City since the company was founded in 2008.
 
-The goal of the analysis in this project is to predict the price of an AirBNB based on factors that an owner would know when they first register their unit. Predictions like this would allow AirBNB help their owners to find an accurate and competitive listing price.
-
-# TODO: add more info about the relevance of this and the general research question
+The research question I'll be answering is: "How can AirBNB most accuratley predict the price of a unit when it is first added?". The goal of the analysis in this project will be to predict the price of an AirBNB based on factors that an owner would know when they first register their unit. Predictions like this would allow AirBNB help their owners to find an accurate and competitive listing price.
 
 The following describes all of the columns found in the data set that we'll be used in this analysis. Note, that there are many other features in the AirBNB data set. However, these are the ones deemed to be most relevant to predicting price.
 
@@ -25,9 +23,9 @@ The following describes all of the columns found in the data set that we'll be u
 ### Cleaning the Data
 
 The following are the changes made to the dataset before the analysis:
-- The 'price' column contained dollar signs and commas, which were removed so the variable could be analyzed as a floating point number.
-- The 'neighbourhood group' column contained mispelled boroughs, which were replaced with the correctly spelled borough name.
-- The 'house rules' column contained many empty/null and "#NAME?" (default value) values. These were replaced with the empty string (no description)
+- The `price` column contained dollar signs and commas, which were removed so the variable could be analyzed as a floating point number.
+- The `neighbourhood group` column contained mispelled boroughs, which were replaced with the correctly spelled borough name.
+- The `house rules` column contained many empty/null and "#NAME?" (default value) values. These were replaced with the empty string (no description)
 - For all other variables, there is no way to predict their value without potentially changing the forecoming analysis. Therefore, these rows were dropped. The dataset was large enough to still contain 2,648,932 AirBNB units after removing these rows.
 
 ### Univariate Analysis
@@ -87,8 +85,13 @@ It is also important to get an initial understanding of the relationship between
 
 #### Price in each NYC Borough, Room Type Combination
 
-<iframe src="assets/pivot.html" width="800" height="400" frameborder="0">
-</iframe>
+| Neighbourhood Group | Entire home/apt | Hotel room | Private room | Shared room |
+|---------------------|------------------|-------------|---------------|--------------|
+| Bronx               | 620.45           | NaN         | 635.52        | 592.78       |
+| Brooklyn            | 626.81           | 736.12      | 625.77        | 634.42       |
+| Manhattan           | 623.27           | 681.87      | 620.44        | 632.46       |
+| Queens              | 626.93           | 433.25      | 632.39        | 645.31       |
+| Staten Island       | 643.03           | NaN         | 604.47        | 715.60       |
 
 ### Imputation
 
@@ -130,7 +133,7 @@ The final model still uses a linear regression model to predict the price of the
 
 The name and house rules of the AirBNB contain important information about the AirBNB that can be used to predict the price of the unit. For example, the name could contain keywords such as "luxury", which would correlate to a more expensive unit, or "budget", meaning the AirBNB is cheaper. Additionally, keywords in the house rules could help predict the price. If a unit describes rules related to a pool, we would expect it to be more expensive. Likewise, if the rules contain information about waiting, for example, it may lead to a cheaper price.
 
-In order to find the most important keywords related to the price, a linear regression model was created using just these features and the price. The model was fit using the test data set. Next, I found the most important words by looking at their respective coefficients in the model. The coefficients were sorted by their absolute values in order to capture the words that have the most affect on the price. Note, any words that appear in less than 30 house rules or AirBNB names were thrown out. Words like this were deemed to be too hyperspecific to a AirBNB unit, and we want to capture general trends in names and rules.
+In order to find the most important keywords related to the price, a linear regression model was created using just these features and the price. The model was fit using the test data set. Next, I found the most important words by looking at their respective coefficients in the model. The coefficients were sorted by their absolute values in order to capture the words that have the most affect on the price. Note, any words that appear in less than 10 house rules or AirBNB names were thrown out. Words like this were deemed to be too hyperspecific to a AirBNB unit, and we want to capture general trends in names and rules.
 
 #### Most Effective AirBNB Name and House Rules Keywords 
 
