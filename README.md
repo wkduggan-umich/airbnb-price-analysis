@@ -12,13 +12,13 @@ The following describes all of the columns found in the data set that we'll be u
 
 | Column    | Description |
 |-------------|-------|
-| id   | The unique id assigned to the AirBNB unit in the dataset     |
-| name | The name of the AirBNB     |
-| price | The price of the AirBNB each night     |
-| construction year | The year the AirBNB property was built     |
-| neighbourhood group   | The NYC borough the AirBNB is located in (Manhattan, Brooklyn, Bronx, Queens, Staten Island)    |
-| room type   | The type of the AirBNB (Entire home/apt, Private room, Shared room, Hotel room)    |
-| house rules   | The house rules of the AirBNB    |
+| `id`   | The unique id assigned to the AirBNB unit in the dataset     |
+| `name` | The name of the AirBNB     |
+| `price` | The price of the AirBNB each night     |
+| `construction year` | The year the AirBNB property was built     |
+| `neighbourhood group`   | The NYC borough the AirBNB is located in (Manhattan, Brooklyn, Bronx, Queens, Staten Island)    |
+| `room type`   | The type of the AirBNB (Entire home/apt, Private room, Shared room, Hotel room)    |
+| `house rules`   | The house rules of the AirBNB    |
 
 ## Data Cleaning and Exploratory Data Analysis
 
@@ -36,7 +36,21 @@ Before beginning the prediction analysis, plots were constructed to get a better
 
 #### Neighbourhood group bar chart
 
+<iframe
+ src="assets/univariate_neighbourhood.html"
+ width="800"
+ height="600"
+ frameborder="0"
+ ></iframe>
+
 #### Price distribution
+
+<iframe
+ src="assets/univariate_price.html"
+ width="800"
+ height="600"
+ frameborder="0"
+ ></iframe>
 
 ### Bivariate Analysis
 
@@ -44,13 +58,37 @@ It is also important to get an initial understanding of the relationship between
 
 #### Price vs. NYC Borough Chart
 
+<iframe
+ src="assets/bivariate_neighbourhood_price.html"
+ width="800"
+ height="600"
+ frameborder="0"
+ ></iframe>
+
 #### Price vs. Room Type
 
+<iframe
+ src="assets/bivariate_type_price.html"
+ width="800"
+ height="600"
+ frameborder="0"
+ ></iframe>
+
 #### Room Type vs. NYC Borough Chart
+
+<iframe
+ src="assets/bivariate_neighbourhood_type.html"
+ width="800"
+ height="600"
+ frameborder="0"
+ ></iframe>
 
 ### Aggregations
 
 #### Price in each NYC Borough, Room Type Combination
+
+<iframe src="assets/pivot.html" width="800" height="400" frameborder="0">
+</iframe>
 
 ### Imputation
 
