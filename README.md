@@ -9,7 +9,7 @@ The research question I'll be answering is: "How can AirBNB most accuratley pred
 The following describes all of the columns found in the data set that we'll be used in this analysis. Note, that there are many other features in the AirBNB data set. However, these are the ones deemed to be most relevant to predicting price.
 
 | Column    | Description |
-|-------------|-------|
+|------------------|-------|
 | `id`   | The unique id assigned to the AirBNB unit in the dataset     |
 | `name` | The name of the AirBNB     |
 | `price` | The price of the AirBNB each night     |
@@ -40,7 +40,6 @@ Before beginning the prediction analysis, plots were constructed to get a better
  height="600"
  frameborder="0"
  ></iframe>
- 
  The plot above shows the distribution of AirBNBs across the five NYC boroughs. As seen from the plot, most of units are in Manhattan and Brooklyn. This feels intuitive because these are the highest areas of tourism in NYC.
 
 #### Price distribution
@@ -51,7 +50,6 @@ Before beginning the prediction analysis, plots were constructed to get a better
  height="600"
  frameborder="0"
  ></iframe>
- 
  The plot above shows a histogram of the price of AirBNBs. As seen from the plot, the price is relativley uniform. Almost all of the units have a nightly price between 100 and 1200 dollars, except for a few outliers.
 
 ### Bivariate Analysis
@@ -66,7 +64,6 @@ It is also important to get an initial understanding of the relationship between
  height="600"
  frameborder="0"
  ></iframe>
- 
  The box plot above shows the relationship between AirBNB price and the NYC borough it is located in. As seen from the chart, the median, Q1, and Q3 of the price are relativley constant across the five boroughs.
 
 #### Price vs. Room Type
@@ -77,7 +74,6 @@ It is also important to get an initial understanding of the relationship between
  height="600"
  frameborder="0"
  ></iframe>
-
  The box plot above shows the relationship between AirBNB price and the room type. Again the price is fairly constant across the different room types. The main note is that their tend to be less hotels on the lower end of the price distribution. This should feel intuitive as many hotels have base rates that would be higher than a typical AirBNB.
 
 
@@ -89,7 +85,6 @@ It is also important to get an initial understanding of the relationship between
  height="600"
  frameborder="0"
  ></iframe>
-
  The plot above shows the number of rentals across both NYC borough and AirBNB type. The key things to note are that there are far more entire homes/apartments in Manhattan compared to other boroughs. Additionally, there are very few hotel listings outside of Manhattan. Additionally, shared rooms are far less common in Staten Island and the Bronx.
 
 ### Aggregations
@@ -134,7 +129,7 @@ The model was trained using the `construction year`, `neighbourhood group`, and 
 
 ### Baseline Model Evaluation
 
-## TODO
+To evaluate the different models, I'll compare the mean squared error, mean absolute error, and R<sup>2</sup> score. 
 
 ## Final Model
 
@@ -146,9 +141,9 @@ The `name` and `house rules` of the AirBNB contain important information about t
 
 In order to find the most important keywords related to the price, a linear regression model was created using just these features and the price. The model was fit using the test data set. Next, I found the most important words by looking at their respective coefficients in the model. The coefficients were sorted by their absolute values in order to capture the words that have the most affect on the price. Note, any words that appear in less than 30 house rules or AirBNB names were thrown out. Words like this were deemed to be too hyperspecific to a AirBNB unit, and we want to capture general trends in names and rules.
 
-#### Most Effective AirBNB Name and House Rules Keywords 
+Finally, a manual iterative search was done on the data set to see how many of the most effective keywords (sorted by TF-IDF) should be used when predicting the price of an AirBNB, using MSE to determine the most effective number of keywords. For the name, it was determined that the 140 most effective keywords were the best predictor. Likewise, for the house rules, the 220 highest keywords were used.
 
-Finally, a manual iterative search was done on the training data to see how many of the most effective keywords should be used when predicting the price of an AirBNB, using MSE to determine the most effective number. For the name, it was determined that the first 140 most effective keywords were the best predictor. Likewise, for the house rules, the first 220 were used.
+#### Most Effective AirBNB Name and House Rules Keywords 
 
 Through this analysis, I found the keywords that have the largest postitive and negative impact on the AirBNB price. The following data table shows the five keywords with the highest TF-IDF for `name` and `house rules`. The name impact and house rules impact column contains a "+" if the keyword had a postitive impact on price and a "-" for a negative impact on price.
 
@@ -167,3 +162,5 @@ The new model uses a similar one hot encoding on the variables that were used in
 ### Final Model Evaluation
 
 ## TODO
+
+## Conclusion
