@@ -118,7 +118,7 @@ The goal of the prediction is to quantify the price of the unit based upon these
 
 ### Features
 
-The features used in the inital regression will are construction year, neighbourhood group, and room type. These features will be used to predict the price of the AirBNB unit.
+The features used in the inital regression will are `construction year`, `neighbourhood group`, and `room type`. These features will be used to predict the price of the AirBNB unit.
 
 Construction year was considered to be a categorical variable. Although it is numeric, the year is made up of ~20 different categorical integers.
 
@@ -130,7 +130,7 @@ All of these variables are categorical and we're passed into the regression mode
 
 The data set was split into two different groups. 80% of the data was used to make the initial training and the final 20% was used to test the performance of the model.
 
-The model was trained using the construction year, neighbourhood group, and room type columns in training set. These columns were first transformed into hot encodings (as mentioned above) before using a linear regression model to predict the price.
+The model was trained using the `construction year`, `neighbourhood group`, and `room type` columns in training set. These columns were first transformed into hot encodings (as mentioned above) before using a linear regression model to predict the price.
 
 ### Baseline Model Evaluation
 
@@ -142,18 +142,28 @@ The final model still uses a linear regression model to predict the price of the
 
 ### New Features
 
-The name and house rules of the AirBNB contain important information about the AirBNB that can be used to predict the price of the unit. For example, the name could contain keywords such as "luxury", which would correlate to a more expensive unit, or "budget", meaning the AirBNB is cheaper. Additionally, keywords in the house rules could help predict the price. If a unit describes rules related to a pool, we would expect it to be more expensive. Likewise, if the rules contain information about waiting, for example, it may lead to a cheaper price.
+The `name` and `house rules` of the AirBNB contain important information about the AirBNB that can be used to predict the price of the unit. For example, the name could contain keywords such as "luxury", which would correlate to a more expensive unit, or "budget", meaning the AirBNB is cheaper. Additionally, keywords in the house rules could help predict the price. If a unit describes rules related to a pool, we would expect it to be more expensive. Likewise, if the rules contain information about waiting, for example, it may lead to a cheaper price.
 
-In order to find the most important keywords related to the price, a linear regression model was created using just these features and the price. The model was fit using the test data set. Next, I found the most important words by looking at their respective coefficients in the model. The coefficients were sorted by their absolute values in order to capture the words that have the most affect on the price. Note, any words that appear in less than 10 house rules or AirBNB names were thrown out. Words like this were deemed to be too hyperspecific to a AirBNB unit, and we want to capture general trends in names and rules.
+In order to find the most important keywords related to the price, a linear regression model was created using just these features and the price. The model was fit using the test data set. Next, I found the most important words by looking at their respective coefficients in the model. The coefficients were sorted by their absolute values in order to capture the words that have the most affect on the price. Note, any words that appear in less than 30 house rules or AirBNB names were thrown out. Words like this were deemed to be too hyperspecific to a AirBNB unit, and we want to capture general trends in names and rules.
 
 #### Most Effective AirBNB Name and House Rules Keywords 
 
-Finally, a manual iterative search was done on the training data to see how many of the most effective keywords should be used when predicting the price of an AirBNB, using MSE to determine the most effective number. For the name, it was determined that the first 370 most effective keywords were the best predictor. Likewise, for the house rules, the first 390 were used.
+Finally, a manual iterative search was done on the training data to see how many of the most effective keywords should be used when predicting the price of an AirBNB, using MSE to determine the most effective number. For the name, it was determined that the first 140 most effective keywords were the best predictor. Likewise, for the house rules, the first 220 were used.
+
+Through this analysis, I found the keywords that have the largest postitive and negative impact on the AirBNB price. The following data table shows the five keywords with the highest TF-IDF for `name` and `house rules`. The name impact and house rules impact column contains a "+" if the keyword had a postitive impact on price and a "-" for a negative impact on price.
+
+| House Rules | House Rules Impact | Name   | Name Impact |
+|-------------|--------------------|--------|-------------|
+| Printed     | +                  | Dorm   | -           |
+| Nespresso   | +                  | Young  | -           |
+| Order       | +                  | Mott   | +           |
+| Affiliated  | +                  | Crash  | -           |
+| Photo       | +                  | Vibes  | -           |
 
 ### Modeling Algorithm
 
 The new model uses a similar one hot encoding on the variables that were used in the baseline model (construction year, neighbourhood group, and room type). Additionally, it now builds a TF-IDF matrix on the name and house rules column. The vocabulary set for these two columns are the list of most effective keywords found previously. Finally, the model uses linear regression on these variables to predict the price of the AirBNB.
 
-### Baseline Model Evaluation
+### Final Model Evaluation
 
 ## TODO
