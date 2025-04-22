@@ -34,7 +34,7 @@ Before beginning the prediction analysis, plots were constructed to get a better
 
 #### Neighbourhood group bar chart
 
-<div style="margin-bottom: -20px;">
+<div style="margin-bottom: -150px;">
     <iframe
     src="assets/univariate_neighbourhood.html"
     width="800"
@@ -46,7 +46,7 @@ Before beginning the prediction analysis, plots were constructed to get a better
 
 #### Price distribution
 
-<div style="margin-bottom: -20px;">
+<div style="margin-bottom: -150px;">
     <iframe
     src="assets/univariate_price.html"
     width="800"
@@ -62,7 +62,7 @@ Before beginning the prediction analysis, plots were constructed to get a better
 It is also important to get an initial understanding of the relationship between variables in the dataset.
 
 #### Price vs. NYC Borough Chart
-<div style="margin-bottom: -20px;">
+<div style="margin-bottom: -150px;">
 <iframe
  src="assets/bivariate_neighbourhood_price.html"
  width="800"
@@ -74,7 +74,7 @@ It is also important to get an initial understanding of the relationship between
 
 #### Price vs. Room Type
 
-<div style="margin-bottom: -20px;">
+<div style="margin-bottom: -150px;">
 <iframe
  src="assets/bivariate_type_price.html"
  width="800"
@@ -86,7 +86,7 @@ It is also important to get an initial understanding of the relationship between
 
 
 #### Room Type vs. NYC Borough Chart
-<div style="margin-bottom: -20px;">
+<div style="margin-bottom: -150px;">
 <iframe
  src="assets/bivariate_neighbourhood_type.html"
  width="800"
