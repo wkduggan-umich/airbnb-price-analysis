@@ -138,7 +138,9 @@ The model was trained using the `construction year`, `neighbourhood group`, and 
 
 ### Baseline Model Evaluation
 
-To evaluate the different models, I'll compare the mean squared error, mean absolute error, and R<sup>2</sup> score. 
+To evaluate the different models, I'll compare the mean squared error, mean absolute error, and R<sup>2</sup> score. Below is the performance of the baseline model.
+
+
 
 ## Final Model
 
@@ -166,10 +168,28 @@ Through this analysis, I found the keywords that have the largest postitive and 
 
 ### Modeling Algorithm
 
-The new model uses a similar one hot encoding on the variables that were used in the baseline model (construction year, neighbourhood group, and room type). Additionally, it now builds a TF-IDF matrix on the name and house rules column. The vocabulary set for these two columns are the list of most effective keywords found previously. Finally, the model uses linear regression on these variables to predict the price of the AirBNB.
+The new model uses a similar one hot encoding on the variables that were used in the baseline model (construction year, neighbourhood group, and room type). Additionally, it now builds a TF-IDF matrix on the name and house rules column. The vocabulary set for these two columns are the list of most effective keywords found previously. Finally, the model uses linear regression on these variables to predict the price of the AirBNB. Below, is the performance of the new model, using this model.
+
+### Finding the Best Prediction Model
+
+Finally, the model was tested using four new prediction models in replacement of linear regression: 
+- Ridge Regression 
+- Random Forest
+- Gradient Boosted
+- Support Vector Regression
+
+Each of these prediction models' hyper-parameters were tuned using GridSearchCV to find the parameters with the minimmum absolute error on the training data. 
 
 ### Final Model Evaluation
 
-## TODO
+Below is the performance of each of the models tested throughout the analysis process. 
+
+## TODO - insert table
 
 ## Conclusion
+
+The most effective model on the test data was the model utilizing all five input parameters. The `room type`, `construction year`, and `neighbourhood group` variables were encoded as one hot variables. Next, I used tf-idf to find the most important keywords in the `name` and `house rules` columns for predicting price. Using an iterative search, I found the most effective number of the highest correlation keywords to use for predicting the AirBNB price. Finally, I compared the effectiveness of different predition models. From this analysis, the most accurate model uses random forest as its prediction model. This model had an RMSLE of 0.74.
+
+There were many short comings in predicting the price of the AirBNB. The most difficult part was the lack of numerical data related to the prediction of the AirBNB price. As a result, I was forced to use purely categorical data in my prediction model. This led to unique prediction practices, such as using TF-IDF to find important key words in predicting the price.
+
+Since the variables used were all categorical, the random forest model was a much better predictor of AirBNB price. This is due to the fact that random forest creates decision trees, benefitting the model as it decides between categorical variables.
