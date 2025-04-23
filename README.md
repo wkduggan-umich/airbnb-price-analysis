@@ -6,7 +6,7 @@ Will Duggan - wkduggan@umich.edu
 
 The goal of this project is to analyze the factors that control the price of an Airbnb. The Airbnb open data set contains data on all 2,667,574 Airbnb units in New York City since the company was founded in 2008.
 
-The research question I'll be answering is: **"How can Airbnb most accuratley predict the price of a newly added unit?"**. The goal of the analysis in this project will be to predict the price of an Airbnb based on factors that an owner would know when they first register their unit. Predictions like this would allow Airbnb help their owners to find an accurate and competitive listing price.
+The research question I'll be answering is: **"How can Airbnb most accurately predict the price of a newly added unit?"**. The goal of the analysis in this project will be to predict the price of an Airbnb based on factors that an owner would know when they first register their unit. Predictions like this would allow Airbnb help their owners to find an accurate and competitive listing price.
 
 The following describes all of the columns found in the data set that we'll be used in this analysis. Note, that there are many other features in the Airbnb data set. However, these are the ones deemed to be most relevant to predicting price.
 
@@ -26,9 +26,9 @@ The following describes all of the columns found in the data set that we'll be u
 
 The following changes were made to clean the dataset before the analysis:
 - The `price` column contained dollar signs and commas, which were removed so the variable could be analyzed as a floating point number.
-- The `neighbourhood group` column contained mispelled boroughs, which were replaced with the correctly spelled borough name.
+- The `neighbourhood group` column contained misspelled boroughs, which were replaced with the correctly spelled borough name.
 - The `house rules` column contained many empty/null and "#NAME?" (default) values. These were replaced with the empty string (no description)
-- For all other variables, there is no way to predict their value without potentially changing the forecoming analysis. Therefore, these rows were dropped. The dataset was large enough to still contain 2,648,932 Airbnb units after removing these rows.
+- For all other variables, there is no way to predict their value without potentially changing the forthcoming analysis. Therefore, these rows were dropped. The dataset was large enough to still contain 2,648,932 Airbnb units after removing these rows.
 
 ### Univariate Analysis
 
@@ -84,7 +84,7 @@ It is also important to get an initial understanding of the relationship between
  frameborder="0"
  ></iframe>
 </div>
- The box plot above shows the relationship between Airbnb price and the room type. Again the price is fairly constant across the different room types. The main note is that their tend to be less hotels on the lower end of the price distribution. This should feel intuitive as many hotels have base rates that would be higher than a typical Airbnb.
+ The box plot above shows the relationship between Airbnb price and the room type. Again the price is fairly constant across the different room types. The main note is that there tend to be less hotels on the lower end of the price distribution. This should feel intuitive as many hotels have base rates that would be higher than a typical Airbnb.
 
 
 #### Room Type vs. NYC Borough Chart
@@ -126,11 +126,11 @@ As seen from the tables, the mean and median often don't defer by much, telling 
 
 ### Imputation
 
-Due to the small amount of data rows that needed to be dropped to remove null values from the dataset, it was deemed unnessecary to do any imputation on the data set. However, as mentioned above, any null or default house rules were replaced with an empty string to represent a unit having no rules.
+Due to the small amount of data rows that needed to be dropped to remove null values from the dataset, it was deemed unnecessary to do any imputation on the data set. However, as mentioned above, any null or default house rules were replaced with an empty string to represent a unit having no rules.
 
 ## Prediction Problem
 
-Based upon the previous variable analysis, I will try to predict the Airbnb price usingupon the data that will be availible to Airbnb when a user first registers their unit. The name, construction year, neighbourhood group, room type, and house rules are all items that the owner of an Airbnb would have to enter when they first register their unit. Most other variables in the data set would be unavailible when a unit is first registered. For example, the average reviews would not be availible until the unit was listed.
+Based upon the previous variable analysis, I will try to predict the Airbnb price usingupon the data that will be available to Airbnb when a user first registers their unit. The name, construction year, neighbourhood group, room type, and house rules are all items that the owner of an Airbnb would have to enter when they first register their unit. Most other variables in the data set would be unavailable when a unit is first registered. For example, the average reviews would not be available until the unit was listed.
 
 The goal of the prediction is to quantify the price of the unit based upon these inputs. Therefore, I am trying to solve a regression problem to best predict the Airbnb's price. To evaluate the different models, I'll compare the mean absolute error (MAE). This was chosen because mean absolute error is robust to outliers, giving extreme luxury or low budget rentals less of a dramatic impact on the model.
 
@@ -150,7 +150,7 @@ All of these variables are categorical, and one hot encoding was used to pass th
 
 The data set was split into two different groups. 80% of the data was used to make the initial training and the final 20% was used to test the performance of the model.
 
-The model was trained using the `construction year`, `neighbourhood group`, and `room type` columns in the training set. These columns were first transformed into hot encodings (as mentioned above) before using a linear regression model to predict the price.
+The model was trained using the `construction year`, `neighbourhood group`, and `room type` columns in the training set. These columns were first transformed into one-hot encodings (as mentioned above) before using a linear regression model to predict the price.
 
 ### Baseline Model Evaluation
 
@@ -164,7 +164,7 @@ Currently, this is not an effective model. Just looking at its general location,
 
 The `name` and `house rules` of the Airbnb contain important information about the Airbnb that can be used to predict the price of the unit. For example, the name could contain keywords such as "luxury", which would correlate to a more expensive unit, or "budget", meaning the Airbnb is cheaper. Additionally, keywords in the house rules could help predict the price. If a unit describes rules related to a pool, we would expect it to be more expensive. Likewise, if the rules contain information about waiting, for example, it may lead to a cheaper price.
 
-In order to find the most important keywords related to the price, a linear regression model was created using just these features and the price. The model was fit using the test data set. Next, I found the most important words by looking at their respective coefficients in the model. The coefficients were sorted by their absolute values in order to capture the words that have the most affect on the price. Note, any words that appear in less than 30 house rules or Airbnb names were thrown out. Words like this were deemed to be too hyperspecific to a Airbnb unit, and we want to capture general trends in names and house rules.
+In order to find the most important keywords related to the price, a linear regression model was created using just these features and the price. The model was fit using the test data set. Next, I found the most important words by looking at their respective coefficients in the model. The coefficients were sorted by their absolute values in order to capture the words that have the most effect on the price. Note, any words that appear in less than 30 house rules or Airbnb names were thrown out. Words like this were deemed to be too hyperspecific to a Airbnb unit, and we want to capture general trends in names and house rules.
 
 Finally, a manual iterative search was done on the data set to see how many of the most effective keywords (sorted by TF-IDF) should be used when predicting the price of an Airbnb, using MSE to determine the most effective number of keywords. For the name, it was determined that the 530 most effective keywords were the best predictor. Likewise, for the house rules, the 690 highest keywords were used.
 
@@ -172,7 +172,7 @@ When using the TF-IDF of the `name` and `house rules` columns, they are now cons
 
 #### Most Effective Airbnb Name and House Rules Keywords 
 
-Through this analysis, I found the keywords that have the largest postitive and negative impact on the Airbnb price. The following data table shows the five keywords with the highest TF-IDF for `name` and `house rules`. The name impact and house rules impact column contains a "+" if the keyword had a postitive impact on price and a "-" for a negative impact on price.
+Through this analysis, I found the keywords that have the largest postitive and negative impact on the Airbnb price. The following data table shows the five keywords with the highest TF-IDF for `name` and `house rules`. The name impact and house rules impact column contains a `+` if the keyword had a postitive impact on price and a `-` for a negative impact on price.
 
 | House Rules | House Rules Impact | Name   | Name Impact |
 |-------------|--------------------|--------|-------------|
@@ -194,18 +194,25 @@ Finally, the model was tested using four new prediction models in replacement of
 - Gradient Boosted
 - Support Vector Regression
 
-Each of these prediction models' hyper-parameters were tuned using GridSearchCV to find the parameters with the minimmum absolute error on the training data. 
+Each of these prediction models' hyper-parameters were tuned using GridSearchCV to find the parameters with the minimum absolute error on the training data. 
 
 ### Final Model Evaluation
 
 Below is the performance of each of the models tested throughout the analysis process. Unless specified, the model uses linear regression as the predictior.
 
-## TODO - insert table
+| Model                                  | Mean Absolute Error |
+|----------------------------------------|----------------------|
+| Baseline Model                         | 287.18               |
+| TF-IDF on Name w/ n = 50               | 287.03               |
+| TF-IDF on House Rules w/ n = 50        | 287.14               |
+| Final Model w/ Linear Regression       | 285.62               |
+| Final Model w/ Ridge Regression        | 285.57               |
+| Final Model w/ Random Forest           | 217.75               |
 
 ## Conclusion
 
-The most effective model on the test data was the model utilizing all five input parameters. The `room type`, `construction year`, and `neighbourhood group` variables were encoded as one hot variables. Next, I used tf-idf to find the most important keywords in the `name` and `house rules` columns for predicting price. Using an iterative search, I found the most effective number of the highest correlation keywords to use for predicting the Airbnb price. Finally, I compared the effectiveness of different predition models. From this analysis, the most accurate model uses random forest as its prediction model. This model had an MAE of **TODO**.
+The most effective model on the test data was the model utilizing all five input parameters. The `room type`, `construction year`, and `neighbourhood group` variables were encoded as one hot variables. Next, I used tf-idf to find the most important keywords in the `name` and `house rules` columns for predicting price. Using an iterative search, I found the most effective number of the highest correlation keywords to use for predicting the Airbnb price. Finally, I compared the effectiveness of different prediction models. From this analysis, the most accurate model uses random forest as its prediction model. This model had an MAE of **217.75**.
 
-There were many short comings in predicting the price of the Airbnb. The most difficult part was the lack of numerical data related to the prediction of the Airbnb price. As a result, I was forced to use purely categorical data in my prediction model. This led to unique prediction practices, such as using TF-IDF to find important key words in predicting the price.
+Since the three of the five variables used were all categorical, the random forest model was a much better predictor of Airbnb price. This is due to the fact that random forest creates decision trees, benefitting the model as it decides between categorical variables.
 
-Since the variables used were all categorical, the random forest model was a much better predictor of Airbnb price. This is due to the fact that random forest creates decision trees, benefitting the model as it decides between categorical variables.
+There were many short comings in predicting the price of the Airbnb. The most difficult part was the lack of numerical data related to the prediction of the Airbnb price. As a result, I was forced to use purely categorical data in my prediction model. This led to unique prediction practices, such as using TF-IDF to find important key words in predicting the price. Additionally, the model doesn't account for other factors that could affect the price, such as proximity to the subway or tourist sights, seasonal pricing, and overall quality of the unit. Overall, this model could serve as an initial attempt to price an Airbnb. With more data to help quantify the quality and cost of a certain unit, then the model could be improved to serve as a recomendation for the listing price.
