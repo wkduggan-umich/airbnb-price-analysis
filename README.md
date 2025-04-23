@@ -7,7 +7,7 @@ Will Duggan - wkduggan@umich.edu
 The goal of this project is to analyze the factors that control the price of an Airbnb. The Airbnb open data set contains data on all 2,667,574 Airbnb units in New York City since the company was founded in 2008.
 
 This project will attempt to answer:
-- **"How can Airbnb most accurately predict the price of a newly added unit?"**
+- **"How can Airbnb accurately predict the price of a newly added unit?"**
 The goal of the analysis in this project will be to introduce factors that predict the price of an Airbnb. Next, I'll use these factors to predict the price of an Airbnb. Predictions like this would allow Airbnb to help their owners find an accurate and competitive listing price for their unit when they first add it to the app.
 
 The following table describes all of the columns found in the data set that will be used in this analysis. Note, that there are many other features in the Airbnb data set. However, these are the ones deemed to be most relevant to predicting price.
@@ -60,7 +60,7 @@ Before beginning the prediction analysis, plots were constructed to get a better
     ></iframe>
 </div>
  
- The plot above shows a histogram of the price of Airbnbs. As seen from the plot, the price is relativley uniform. Almost all of the unit's nightly price lies uniformly between 100 and 1200 dollars, except for a few outliers.
+ The plot above shows a histogram of the price of Airbnbs. As seen from the plot, the price is relatively uniform. Almost all of the unit's nightly price lies uniformly between 100 and 1200 dollars, except for a few outliers.
 
 ### Bivariate Analysis
 
@@ -76,7 +76,7 @@ It is also important to get an initial understanding of the relationship between
  ></iframe>
 </div>
 
- The box plot above shows the relationship between Airbnb price and the NYC borough it is located in. As seen from the chart, the median, Q1, and Q3 of the price are relativley constant across the five boroughs.
+ The box plot above shows the relationship between Airbnb price and the NYC borough it is located in. As seen from the chart, the median, Q1, and Q3 of the price are relatively constant across the five boroughs.
 
 #### Price vs. Room Type
 
@@ -127,7 +127,7 @@ The following two tables show the mean and median price across different NYC bor
 | Queens              | 624.0           | 367.5       | 629.0         | 659.5        |
 | Staten Island       | 667.0           | NaN         | 593.0         | 680.0        |
 
-As seen from the tables, the mean and median often don't defer by much, telling us that the data is not often skewed in these combinations. Additionally, we can see that hotels have a lot of variance in price across different boroughs. The `NaN` values for hotel rooms in the Bronx and Staten Island imply there are no hotel room listings in those boroughs. Overall, the data does vary across these different combinations but not by much (except for hotel rooms).
+As seen from the tables, the mean and median often don't differ by much, telling us that the data is not often skewed in these combinations. Additionally, we can see that hotels have a lot of variance in price across different boroughs. The `NaN` values for hotel rooms in the Bronx and Staten Island imply there are no hotel room listings in those boroughs. Overall, the data does vary across these different combinations but not by much (except for hotel rooms).
 
 ### Imputation
 
@@ -159,9 +159,9 @@ The model was trained using the `construction year`, `neighbourhood group`, and 
 
 ### Baseline Model Evaluation
 
-The baseline model had an MAE of **287.18** when tested on unseen test data. 
+The baseline model had an MAE of **287.18** when tested on unseen data. 
 
-Currently, this is not an effective model. Just looking at its general location, construction year, and type are not effective enough to distinguish between a higher end and lower end Airbnb. In order to further distinguish between units, we need a way of quantifying other attributed of the Airbnb.
+Currently, this is not an effective model. Just looking at its general location, construction year, and type are not effective enough to distinguish between a higher end and lower end Airbnb. In order to further distinguish between units, we need a way of quantifying other attributes of the Airbnb.
 
 ## Final Model
 
@@ -199,7 +199,7 @@ Finally, the model was tested using four new prediction models in replacement of
 - Gradient Boosted
 - Support Vector Regression
 
-Each of these prediction models' hyper-parameters were tuned using GridSearchCV to find the parameters with the minimum absolute error on the training data. 
+Each of these prediction models' hyper-parameters were tuned using GridSearchCV to find the parameters with the minimum MAE on the training data. 
 
 ### Final Model Evaluation
 
@@ -212,12 +212,14 @@ Below is the performance of each of the models tested throughout the analysis pr
 | TF-IDF Model With 50 Most Significant House Rules Keywords         | 287.14               |
 | Final Model With Linear Regression       | 285.62               |
 | Final Model With Ridge Regression        | 285.57               |
+| Final Model With Gradient Boosting        | 285.58               |
+| Final Model With Support Vector Regression | 284.77               |
 | Final Model With Random Forest           | 217.75               |
 
 ## Conclusion
 
-The most effective model on the test data was the model utilizing all five input parameters. The `room type`, `construction year`, and `neighbourhood group` variables were encoded as one hot variables. Next, I used tf-idf to find the most important keywords in the `name` and `house rules` columns for predicting price. Using an iterative search, I found the best number of keywords to use for predicting the Airbnb price. Finally, I compared the effectiveness of different prediction models. From this analysis, the most accurate model on these features uses random forest as its prediction model. This model had an MAE of **217.75**.
+The most effective model on the test data was the model utilizing all five input parameters. The `room type`, `construction year`, and `neighbourhood group` variables were encoded as one hot variables. Next, I used TF-IDF to find the most important keywords in the `name` and `house rules` columns for predicting price. Using an iterative search, I found the most effective quantity of keywords to use for predicting the Airbnb price. Finally, I compared the effectiveness of different prediction models. From this analysis, the most accurate model on these features uses random forest as its prediction model. This model had an MAE of **217.75**.
 
-Since three of the five variables used were all categorical, the random forest model was a much better predictor of Airbnb price. This is due to the fact that random forest creates decision trees, benefitting a model that's heavy in categorical variables.
+Since three of the five variables used were categorical, the random forest model was a much better predictor of Airbnb price. This is due to the fact that random forest creates decision trees, benefitting a model that's heavy in categorical variables.
 
-There were many short comings in predicting the price of the Airbnb. The most difficult part was the lack of numerical data related to the prediction of the Airbnb price. As a result, I was forced to use purely categorical data in my prediction model. This led to unique prediction practices, such as using TF-IDF to find important key words in predicting the price. Additionally, the model doesn't account for other factors that could affect the price, such as proximity to the subway or tourist sights, seasonal pricing, and overall quality of the unit. Overall, this model could serve as an initial attempt to price an Airbnb. With more data to help quantify the quality and cost of a certain unit, the model could be improved to serve as a concrete recomendation for the listing price.
+There were many short comings in predicting the price of the Airbnb. The most difficult part was the lack of numerical data related to the prediction of the Airbnb price. As a result, I was forced to use mostly categorical features in my prediction model. This led to unique prediction practices, such as using TF-IDF to find important key words in predicting the price. Additionally, the model doesn't account for other factors that could affect the price, such as proximity to the subway or tourist sights, seasonal pricing, and overall quality of the unit. Overall, this model could serve as an initial attempt to price an Airbnb. With more data to help quantify the quality and cost of a certain unit, the model could be improved to serve as a concrete recomendation for the listing price.
